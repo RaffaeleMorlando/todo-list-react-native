@@ -1,16 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView, Pressable } from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
 
 const [task, setTask] = useState();
-const [items, setItems] = useState([
-  'Task-1',
-  'Task-2',
-  'Task-3',
-]);
+const [items, setItems] = useState([]);
+
+
+const fetchData =  async () => {
+  const response = await fetch('http://localhost:5000/api/v1/todo');
+  const json = await response.json();
+  setItems(json);
+  console.log(items);
+}
+
+useEffect(() => {
+
+  fetchData();
+  
+},[]);
+
 
 const addTask = () => {
   setItems([...items,task])
@@ -40,8 +51,8 @@ const deleteTask = (index) => {
               ]} 
               key={i} 
               onPressOut={() => deleteTask(i)}
-              >
-              <Task text={item}/> 
+            >
+              <Task task={item}/> 
             </Pressable>
           )}
         </View>

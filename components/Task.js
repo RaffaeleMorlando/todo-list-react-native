@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, Pressable, View } from 'react-native'
 
-const Task = ({text}) => {
+const Task = ({task}) => {
+
+  useEffect(() => {
+  }, []);
 
   return (
     <View style={styles.task}>
       <View style={styles.itemLeft}>
         <Pressable style={styles.squareLeft} />
-        <Text style={styles.task}>{text}</Text>
+        <Text style={styles.task}>{ task.text }</Text>
       </View>
     </View>
   )
@@ -17,7 +20,9 @@ const styles = StyleSheet.create({
   task: {
     padding: 10,
     paddingHorizontal: 20,
-    fontSize: 20,
+    color: 'gray',
+    fontWeight: 'bold',
+    fontSize: 15,
   },
   itemLeft: {
     flexDirection: 'row',
