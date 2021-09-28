@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView, Pressable } from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
@@ -16,13 +16,34 @@ const addTask = () => {
   setItems([...items,task])
 }
 
+const deleteTask = (index) => {
+  let itemsCopy = [...items];
+  itemsCopy.splice(index,1);
+  setItems(itemsCopy);
+}
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.wrapperTask}>
         <Text style={styles.textTitle}>Today's task</Text>
         <View style={styles.itemsWrapper}>
-          {items.map((item, i) => <Task text={item} key={i}/> )}
+          {items.map((item, i) => 
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed
+                    ? 'rgb(210, 230, 255)'
+                    : 'white'
+                },
+                styles.task
+              ]} 
+              key={i} 
+              onPressOut={() => deleteTask(i)}
+              >
+              <Task text={item}/> 
+            </Pressable>
+          )}
         </View>
       </View>
       <KeyboardAvoidingView 
@@ -79,5 +100,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     backgroundColor: '#fff',
     overflow: 'hidden'
+  },
+  task: {
+    marginVertical: 10,
+    borderRadius: 20,
   }
 });

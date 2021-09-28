@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, Pressable, View } from 'react-native'
 
 const Task = ({text}) => {
 
   return (
     <View style={styles.task}>
       <View style={styles.itemLeft}>
-        <TouchableOpacity style={styles.squareLeft} />
+        <Pressable style={styles.squareLeft} />
         <Text style={styles.task}>{text}</Text>
       </View>
     </View>
@@ -15,12 +15,9 @@ const Task = ({text}) => {
 
 const styles = StyleSheet.create({
   task: {
-    padding: 5,
+    padding: 10,
     paddingHorizontal: 20,
     fontSize: 20,
-    marginVertical: 10,
-    backgroundColor: '#fff',
-    borderRadius: 20,
   },
   itemLeft: {
     flexDirection: 'row',
