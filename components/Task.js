@@ -10,7 +10,7 @@ const Task = ({task}) => {
     <View style={styles.task}>
       <View style={styles.itemLeft}>
         <Pressable style={styles.squareLeft} />
-        <Text style={styles.task}>{ task.text }</Text>
+        <Text style={styles.task}>{ task.title }</Text>
       </View>
     </View>
   )

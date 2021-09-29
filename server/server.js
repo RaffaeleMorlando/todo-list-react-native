@@ -1,13 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import todoRoutes from './routes/todoRoutes.js';
+import connectDB from './config/db.js';
 
-const app = express();
 
-// Accede al file .env 
+// ACCESSO AL FILE .ENV
 dotenv.config();
 
-// Middleware applicato se il path è matchato
+// CONNESSIONE A MONGODB
+connectDB();
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+// MIDDLEWATE APPLICATO SUL PATH '/api/v1/todo'
 app.use('/api/v1/todo', todoRoutes);
 
 app.listen(process.env.PORT, () => {

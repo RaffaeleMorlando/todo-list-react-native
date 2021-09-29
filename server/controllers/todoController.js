@@ -1,29 +1,34 @@
+import TodoModel from '../models/Todo.js';
+
 const getTodos = async (req,res) => {
-  console.log(req);
+  
   try {
-    res.status(500).json([
-      {
-        "test": "task-0",
-        "text": "Hello"
-      },
-      {
-        "test": "task-1",
-        "text": "Hello"
-      },
-      {
-        "test": "task-0",
-        "text": "Hello"
-      },
-      {
-        "test": "task-1",
-        "text": "Hello"
-      },
-    ]);
+    const todos = await TodoModel.find();
+    res.status(200).json(todos);
   } catch (error) {
     res.status(400);
   }
 }
 
-const createTodo = async (req,res) => {}
+const createTodo = async (req,res) => {
+  const todo = new TodoModel(req.body);
+  try {
+    await todo.save();
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
 
-export { getTodos, createTodo };
+}
+
+const deleteTodo = async (req, res) => {
+  const {_id} = req.body;
+  try {
+    const response = TodoModel.findByIdAndRemove(_id);
+    res.status(200);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+}
+
+export { getTodos, createTodo, deleteTodo };
