@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet } from 'react-native';
-import Home from './screens/Home';
+import Todo from './screens/Todo';
 import Folders from './screens/Folders';
 
 const Stack = createNativeStackNavigator();
@@ -13,12 +13,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-          name="Home"
-          component={Home}
-        />
-        <Stack.Screen 
           name="Folders"
           component={Folders} 
+        />
+        <Stack.Screen 
+          name="Todo"
+          component={Todo}
         />
       </Stack.Navigator>
     </NavigationContainer>

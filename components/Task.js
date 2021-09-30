@@ -10,7 +10,7 @@ const Task = ({task}) => {
     <View style={styles.task}>
       <View style={styles.itemLeft}>
         <Pressable style={styles.squareLeft} />
-        <Text style={styles.task}>{ task.title }</Text>
+        <Text style={styles.taskTitle}>{ task.title }</Text>
       </View>
     </View>
   )
@@ -18,11 +18,16 @@ const Task = ({task}) => {
 
 const styles = StyleSheet.create({
   task: {
-    padding: 10,
+    padding: 20,
     paddingHorizontal: 20,
-    color: 'gray',
     fontWeight: 'bold',
-    fontSize: 15,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    color: '#000',
+    shadowColor: '#171717',
+    shadowOffset: {width: 1, height: 5},
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   itemLeft: {
     flexDirection: 'row',
@@ -34,6 +39,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#299f',
     opacity: 0.5,
+  },
+  taskTitle: {
+    marginLeft: 20,
+    fontSize: 18,
   }
 })
 
