@@ -1,9 +1,9 @@
-import TodoModel from '../models/Todo.js';
+import Todo from '../models/Todo.js';
 
 const getTodos = async (req,res) => {
   
   try {
-    const todos = await TodoModel.find();
+    const todos = await Todo.find();
     res.status(200).json(todos);
   } catch (error) {
     res.status(400);
@@ -11,7 +11,7 @@ const getTodos = async (req,res) => {
 }
 
 const createTodo = async (req,res) => {
-  const todo = new TodoModel(req.body);
+  const todo = new Todo(req.body);
   try {
     await todo.save();
     res.status(200).json(todo);
@@ -24,7 +24,7 @@ const createTodo = async (req,res) => {
 const deleteTodo = async (req, res) => {
   const {_id} = req.body;
   try {
-    const response = await TodoModel.findByIdAndRemove(_id);
+    const response = await Todo.findByIdAndRemove(_id);
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json(error.message);

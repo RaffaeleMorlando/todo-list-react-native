@@ -1,13 +1,16 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export const Folder = ({folderName}, {navigation}) => {
-    return (
-      <View style={styles.folder}>
-        {/* <Text >{ folderName }</Text> */}
-        <Button title={folderName} onPress={() => navigation.navigate('Todo')}></Button>
-      </View>
-    )
+export const Folder = ({ folderName }) => {
+  
+  const navigation = useNavigation(); 
+
+  return (
+    <View style={ styles.folder }>
+      <Button title={ folderName } onPress={() => navigation?.navigate('Todo')}></Button>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

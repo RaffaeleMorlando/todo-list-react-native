@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView, ScrollView, Pressable } from 'react-native';
 import Task from '../components/Task';
+import Inputs from '../components/Inputs';
 
 const Todo = ({ navigation }) => {
 
@@ -70,10 +71,6 @@ const Todo = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Button
-        title="Go to Folders"
-        onPress={() => navigation.navigate('Folders')}
-      />
       <View style={styles.wrapperTask}>
         <ScrollView>
           <Text style={styles.textTitle}>Today's task</Text>
@@ -100,7 +97,7 @@ const Todo = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-        <KeyboardAvoidingView 
+        {/* <KeyboardAvoidingView 
           behavior={(Platform.OS === 'ios') ? "padding" : null}
           style={styles.inputSection}
         >
@@ -115,7 +112,8 @@ const Todo = ({ navigation }) => {
             <Text style={styles.text}>+</Text>
           </Pressable>
           }
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView> */}
+        <Inputs  action={ createTodo }/>
       </View>
   )
 }
