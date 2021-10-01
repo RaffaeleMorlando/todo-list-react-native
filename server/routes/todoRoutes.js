@@ -3,9 +3,8 @@ import { getTodos, createTodo, deleteTodo } from '../controllers/todoController.
 
 const router = express.Router();
 
-router.route('/')
-  .get(getTodos)
-  .delete(deleteTodo);
+router.get('/:id',getTodos)
+router.route('/').delete(deleteTodo);
 router.post('/new', createTodo);
 
 

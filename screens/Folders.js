@@ -1,13 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import React, { useEffect, useState, useRef, useContext } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import Folder from '../components/Folder'
-// import dataFolder from '../folderTest/dataFolder';
 import Inputs from '../components/Inputs';
+import { Context } from '../store';
 
 export default function Folders() {
 
   const [folders, setFolders] = useState([]);
   const ref = useRef(0)
+  const context = useContext(Context);
+  const [state, dispatch] = context;
+
+
 
   const getFolders =  async () => {
 
@@ -15,6 +19,7 @@ export default function Folders() {
     const folders = await response.json();
 
     if(folders) {
+      await dispatch({ type: 'GET_FOLDERS', payload: folders});
       setFolders(folders);
     }
 
@@ -35,6 +40,7 @@ export default function Folders() {
     })
 
     const data = await response.json();
+    await dispatch({ type: 'ADD_FOLDER', payload: data })
 
     setFolders([...folders,data])
     ref.current++
@@ -42,26 +48,27 @@ export default function Folders() {
 
   useEffect(() => {
 
-   getFolders();
+    getFolders();
 
   }, [ref.current]);
 
   return (
-    <View style={styles.container}>
-      <View >
-        <ScrollView >
-          <View style={styles.foldersWrapper}>
-            { folders.map((folder, i) => 
-              <Folder 
-                key={ folder._id }
-                folderName={ folder.folder_name }
-              />
-            )}
-          </View>
-        </ScrollView>
-      </View> 
-      <Inputs  action={createfolder}/>
-    </View>
+      <View style={styles.container}>
+        <View >
+          <ScrollView >
+            <View style={styles.foldersWrapper}>
+              { folders.map((folder, i) => 
+                <Folder 
+                  key={ folder._id }
+                  folderName={ folder.folder_name }
+                  folderId={ folder._id }
+                />
+              )}
+            </View>
+          </ScrollView>
+        </View> 
+        <Inputs  action={createfolder}/>
+      </View>
   )
 }
 
@@ -72,8 +79,8 @@ const styles = StyleSheet.create({
   },
   foldersWrapper: {
     padding: 20,
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    paddingLeft: 30,
+    // flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // paddingLeft: 30,
   },
 });

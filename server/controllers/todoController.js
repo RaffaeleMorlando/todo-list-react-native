@@ -1,13 +1,14 @@
 import Todo from '../models/Todo.js';
 
 const getTodos = async (req,res) => {
-  
+  const { id } = req.params;
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({folder_id: id});
     res.status(200).json(todos);
   } catch (error) {
     res.status(400);
   }
+
 }
 
 const createTodo = async (req,res) => {

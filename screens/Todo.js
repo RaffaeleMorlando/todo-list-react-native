@@ -1,21 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView, ScrollView, Pressable } from 'react-native';
 import Task from '../components/Task';
 import Inputs from '../components/Inputs';
+import { Context } from '../store';
 
-const Todo = ({ navigation }) => {
+const Todo = () => {
 
   const [task, setTask] = useState();
   const [items, setItems] = useState([]);
   const ref = useRef(0)
 
 
-  const fetchData = async () => {
+  const context = useContext(Context);
+  const [state, dispatch] = context;
 
-    const response = await fetch('http://localhost:5000/api/v1/todo');
+
+  const fetchData = async () => {
+    const response = await fetch(`http://localhost:5000/api/v1/todo/${state.folderId}`);
     const data = await response.json();
-    setItems(data);
+
+    if(data !== null) {
+      setItems(data);
+    }
 
   }
 
@@ -31,7 +38,7 @@ const Todo = ({ navigation }) => {
     },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({'title': task})
+      body: JSON.stringify({'title': task, 'folder_id': state.folderId})
     })
 
     const data = await response.json();
@@ -73,7 +80,7 @@ const Todo = ({ navigation }) => {
       <StatusBar style="auto" />
       <View style={styles.wrapperTask}>
         <ScrollView>
-          <Text style={styles.textTitle}>Today's task</Text>
+          <Text style={styles.textTitle}>{ state.folderName }</Text>
           { items.length === 0 && (
             <TextInput style={styles.emptyMessage}>Non ci sono task al momento</TextInput>
           )}
@@ -97,22 +104,6 @@ const Todo = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-        {/* <KeyboardAvoidingView 
-          behavior={(Platform.OS === 'ios') ? "padding" : null}
-          style={styles.inputSection}
-        >
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text => setTask(text))}
-            clearButtonMode='always'
-            autoCapitalize='sentences'
-          />
-          { task?.length  > 0 &&
-          <Pressable style={styles.btnInput} onPress={() => createTodo(task)}>
-            <Text style={styles.text}>+</Text>
-          </Pressable>
-          }
-        </KeyboardAvoidingView> */}
         <Inputs  action={ createTodo }/>
       </View>
   )

@@ -14,6 +14,10 @@ const todoSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
     default: false
+  },
+  folder_id: {
+    type: String,
+    required: true,
   }
 },
 { timestamps: true }

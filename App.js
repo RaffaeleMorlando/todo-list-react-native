@@ -5,23 +5,29 @@ import { StyleSheet } from 'react-native';
 import Todo from './screens/Todo';
 import Folders from './screens/Folders';
 
+// ------------------------------
+import Store from './store';
+// ------------------------------
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen 
-          name="Folders"
-          component={Folders} 
-        />
-        <Stack.Screen 
-          name="Todo"
-          component={Todo}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Store>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="Folders"
+            component={Folders} 
+            />
+          <Stack.Screen 
+            name="Todo"
+            component={Todo}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Store>
   )
 }
 
