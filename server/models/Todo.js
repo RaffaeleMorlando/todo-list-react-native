@@ -18,6 +18,11 @@ const todoSchema = new mongoose.Schema({
   folder_id: {
     type: String,
     required: true,
+  },
+  testFolder_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Folder',
   }
 },
 { timestamps: true }

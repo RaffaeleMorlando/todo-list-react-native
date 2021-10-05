@@ -21,4 +21,14 @@ const createFolder = async ( req, res) => {
   }
 }
 
-export { createFolder, getFolders };
+const deleteFolder = async (req, res) => {
+  const {_id} = req.body;
+  try {
+    const response = await Folder.findByIdAndRemove(_id);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+}
+
+export { createFolder, getFolders, deleteFolder };

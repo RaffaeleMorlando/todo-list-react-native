@@ -11,8 +11,7 @@ export default function Folders() {
   const context = useContext(Context);
   const [state, dispatch] = context;
 
-
-
+  
   const getFolders =  async () => {
 
     const response = await fetch('http://localhost:5000/api/v1/folder');
@@ -52,11 +51,19 @@ export default function Folders() {
 
   }, [ref.current]);
 
+
   return (
       <View style={styles.container}>
         <View >
           <ScrollView >
             <View style={styles.foldersWrapper}>
+              {/* { state.folders.map((folder, i) => 
+                <Folder 
+                  key={ folder._id }
+                  folderName={ folder.folder_name }
+                  folderId={ folder._id }
+                />
+              )} */}
               { folders.map((folder, i) => 
                 <Folder 
                   key={ folder._id }

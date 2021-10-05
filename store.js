@@ -1,5 +1,6 @@
 import React, {createContext, useReducer} from "react";
-import Reducer from './reducers/reducer'
+import Reducer from './reducers/folders.js'
+
 
 const initialState = {
   folderName: null,
@@ -8,7 +9,7 @@ const initialState = {
 };
 
 // -----------------------------
-// HOC 
+// HIGHER-ORDER COMPONENTS / STORE 
 // -----------------------------
 const Store = ({children}) => {
     const [state, dispatch] = useReducer(Reducer, initialState);

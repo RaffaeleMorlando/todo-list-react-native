@@ -38,7 +38,7 @@ const Todo = () => {
     },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({'title': task, 'folder_id': state.folderId})
+      body: JSON.stringify({'title': task, 'folder_id': state.folderId, 'testFolder_id': state.folderId})
     })
 
     const data = await response.json();

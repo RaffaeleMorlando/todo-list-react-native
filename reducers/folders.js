@@ -11,6 +11,11 @@ const Reducer = (state, action) => {
         folderName: action.payload.folderName,
         folderId: action.payload.folderId,
       }
+    case 'DELETE_FOLDER': 
+      return {
+        ...state,
+        folders: state.folders.filter((folder) => folder._id  === action.payload)
+      }
       default:
           return state;
   }
