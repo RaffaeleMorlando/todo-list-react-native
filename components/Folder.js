@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     paddingVertical: 15,
-    backgroundColor: 'white',
+    backgroundColor: 'lightgray',
   },
   folderWrapper: {
    width: '100%',

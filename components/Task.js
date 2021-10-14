@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, Pressable, View } from 'react-native'
 
 const Task = ({task}) => {
-
-  useEffect(() => {
-  }, []);
 
   return (
     <View style={styles.task}>
       <View style={styles.itemLeft}>
         <Pressable style={styles.squareLeft} />
-        <Text style={styles.taskTitle}>{ task.title }</Text>
+        {/* MONGODB */}
+        {/* <Text style={styles.taskTitle}>{ task.title }</Text> */}
+
+        {/* MYSQL */}
+        <Text style={styles.taskTitle}>{ task.todo_name }</Text>
       </View>
     </View>
   )

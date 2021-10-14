@@ -18,6 +18,7 @@ const Todo = () => {
 
   const fetchData = async () => {
     const response = await fetch(`http://localhost:5000/api/v1/todo/${state.folderId}`);
+    
     const data = await response.json();
 
     if(data !== null) {
@@ -50,6 +51,7 @@ const Todo = () => {
   }
 
   const deleteTodo = async (id) => {
+    
     const response =  await fetch('http://localhost:5000/api/v1/todo', {
       method: 'DELETE',
       mode: 'cors',
@@ -60,7 +62,8 @@ const Todo = () => {
       },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({'_id': id})
+      // body: JSON.stringify({'_id': id})
+      body: JSON.stringify({'id': id})
     })
 
     if(response) {
@@ -96,7 +99,8 @@ const Todo = () => {
                   styles.task
                 ]} 
                 key={i} 
-                onPressOut={() => deleteTodo(item._id)}
+                // onPressOut={() => deleteTodo(item._id)}
+                onPressOut={() => deleteTodo(item.id)}
               >
                 <Task task={item}/> 
               </Pressable>
@@ -115,6 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   wrapperTask: {
+    paddingTop: 30,
     paddingHorizontal: 20,
     height: '100%',
   },

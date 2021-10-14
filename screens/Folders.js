@@ -66,9 +66,22 @@ export default function Folders() {
               )} */}
               { folders.map((folder, i) => 
                 <Folder 
-                  key={ folder._id }
+                
+                  // ----------------------------
+                  // MONGODB
+                  // ----------------------------
+
+                  // key={ folder._id }
+                  // folderName={ folder.folder_name }
+                  // folderId={ folder._id }
+
+                  // ----------------------------
+                  // MYSQL
+                  // ----------------------------
+
+                  key={ folder.id }
                   folderName={ folder.folder_name }
-                  folderId={ folder._id }
+                  folderId={ folder.id }
                 />
               )}
             </View>
@@ -82,12 +95,10 @@ export default function Folders() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D34E24',
+    // backgroundColor: '#252bdb',
+    backgroundColor: '#fff',
   },
   foldersWrapper: {
     padding: 20,
-    // flexWrap: 'wrap',
-    // flexDirection: 'row',
-    // paddingLeft: 30,
   },
 });

@@ -1,7 +1,6 @@
 import React, {createContext, useReducer} from "react";
 import Reducer from './reducers/folders.js'
 
-
 const initialState = {
   folderName: null,
   user: null,

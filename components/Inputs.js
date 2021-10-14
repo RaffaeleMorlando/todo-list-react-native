@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, Pressable, TextInput, Text } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, KeyboardAvoidingView, Pressable, TextInput, Text, InputAccessoryView } from 'react-native';
+
+
+// import { Button, InputAccessoryView, ScrollView, TextInput, StyleSheet, View , Pressable, Text, KeyboardAvoidingView} from 'react-native';
+
 
 const Inputs = ({ action }) => {
 
   const [textInput, setTextInput] = useState();
+  const inputAccessoryViewID = 'uniqueID';
+
+
+
+  // const initialText = '';
+  // const [text, setText] = useState(initialText);
+  // const [keyboardState, setKeyboardSate] = useState(false);
+  // const inputRef = useRef(null)
 
   return (
     <KeyboardAvoidingView 
@@ -19,13 +31,54 @@ const Inputs = ({ action }) => {
       <Pressable style={styles.btnInput} onPress={() => action(textInput)}>
         <Text style={styles.text}>+</Text>
       </Pressable>
+      <InputAccessoryView nativeID={inputAccessoryViewID}>
+        <Pressable
+          onPress={() => setText(initialText)}
+          title="Clear text"
+        />
+      </InputAccessoryView>
     </KeyboardAvoidingView>
+
+  // <>
+  //   <KeyboardAvoidingView 
+  //     behavior={(Platform.OS === 'ios') ? "padding" : null}
+  //     style={styles.inputSection}
+  //   >
+      
+  //     <InputAccessoryView nativeID={inputAccessoryViewID}>
+  //     <ScrollView keyboardDismissMode="interactive">
+  //       <View style={styles.upperKeyboard} >
+  //         <TextInput
+  //           style={{
+  //             padding: 16,
+  //             marginTop: 50,
+  //           }}
+  //           inputAccessoryViewID={inputAccessoryViewID}
+  //           onChangeText={setText}
+  //           value={text}
+  //           placeholder={'Please type here…'}
+  //           ref={inputRef}
+  //         />
+  //       </View>
+  //     </ScrollView>
+  //     </InputAccessoryView>
+  //     <Pressable style={styles.btnInput} onPress={() => inputRef.current.focus()}>
+  //       <Text style={styles.text}>+</Text>
+  //     </Pressable>
+  //   </KeyboardAvoidingView>
+  // </>
   );
 }
 
 const styles = StyleSheet.create({
+  upperKeyboard: {
+    width: 500,
+    height: 200,
+    backgroundColor: 'lightblue',
+  },
   inputSection: {
     flexDirection: 'row',
+    // justifyContent: 'flex-end',
     justifyContent: 'space-between',
     position: 'absolute',
     bottom: 0,
